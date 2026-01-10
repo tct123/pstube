@@ -2,7 +2,7 @@ name: pstube
 description: Watch and download videos without ads
 
 publish_to: none
-version: 2.9.9+5
+version: 3.1.0
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
