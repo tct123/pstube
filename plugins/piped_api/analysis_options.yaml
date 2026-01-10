@@ -1,0 +1,20 @@
+analyzer:
+  language:
+    strict-inference: true
+    strict-raw-types: true
+  strong-mode:
+    implicit-dynamic: false
+    implicit-casts: false
+  exclude:
+    - test/*.dart
+    - lib/**/*.g.dart
+    - lib/src/api/unauthenticated_api.dart
+    - lib/src/api/video_api.dart
+    - lib/src/api/search_api.dart
+  errors:
+    deprecated_member_use_from_same_package: ignore
+    invalid_override: ignore
+    argument_type_not_assignable: ignore
+    missing_default_value_for_parameter: ignore
+    not_initialized_non_nullable_instance_field: ignore
+    unused_element_parameter: ignore

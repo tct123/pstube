@@ -1,0 +1,1019 @@
+//
+// AUTO-GENERATED FILE, DO NOT MODIFY!
+//
+
+import 'dart:async';
+
+import 'package:built_value/serializer.dart';
+import 'package:dio/dio.dart';
+
+import 'package:built_collection/built_collection.dart';
+import 'package:piped_api/src/api_util.dart';
+import 'package:piped_api/src/model/channel_info.dart';
+import 'package:piped_api/src/model/comments_page.dart';
+import 'package:piped_api/src/model/exception_error.dart';
+import 'package:piped_api/src/model/regions.dart';
+import 'package:piped_api/src/model/search_filter.dart';
+import 'package:piped_api/src/model/search_page.dart';
+import 'package:piped_api/src/model/channel_item.dart';
+import 'package:piped_api/src/model/playlist_item.dart';
+import 'package:piped_api/src/model/search_item.dart';
+import 'package:piped_api/src/model/stream_item.dart';
+import 'package:piped_api/src/model/streams_page.dart';
+import 'package:piped_api/src/model/video_info.dart';
+import 'package:one_of/one_of.dart';
+
+StreamItem _deserializeStreamItem(Map<String, dynamic> json) {
+  return StreamItem((b) => b
+    ..type = json['type'] as String?
+    ..duration = json['duration'] as int? ?? 0
+    ..thumbnail = json['thumbnail'] as String? ?? ''
+    ..title = json['title'] as String? ?? ''
+    ..uploaded = json['uploaded'] as int?
+    ..uploadedDate = json['uploadedDate'] as String?
+    ..uploaderAvatar = json['uploaderAvatar'] as String?
+    ..uploaderName = json['uploaderName'] as String?
+    ..uploaderUrl = json['uploaderUrl'] as String?
+    ..uploaderVerified = json['uploaderVerified'] as bool?
+    ..url = json['url'] as String? ?? ''
+    ..views = json['views'] as int?
+    ..isShort = json['isShort'] as bool?
+    ..shortDescription = json['shortDescription'] as String?);
+}
+
+BuiltList<StreamItem> _deserializeStreamItemList(List<dynamic> jsonList) {
+  return BuiltList<StreamItem>(
+    jsonList
+        .map((item) => _deserializeStreamItem(item as Map<String, dynamic>)),
+  );
+}
+
+ChannelItem _deserializeChannelItem(Map<String, dynamic> json) {
+  return ChannelItem((b) => b
+    ..type = json['type'] as String?
+    ..thumbnail = json['thumbnail'] as String?
+    ..description = json['description'] as String?
+    ..name = json['name'] as String?
+    ..subscribers = json['subscribers'] as int?
+    ..verified = json['verified'] as bool?);
+}
+
+PlaylistItem _deserializePlaylistItem(Map<String, dynamic> json) {
+  return PlaylistItem((b) => b
+    ..type = json['type'] as String?
+    ..thumbnail = json['thumbnail'] as String?
+    ..name = json['name'] as String?
+    ..url = json['url'] as String?
+    ..videos = json['videos'] as int?);
+}
+
+SearchItem _deserializeSearchItem(Map<String, dynamic> json) {
+  final type = json['type'] as String?;
+  final oneOfTypes = [ChannelItem, PlaylistItem, StreamItem];
+  Object oneOfResult;
+  Type oneOfType;
+
+  switch (type) {
+    case 'channel':
+      oneOfResult = _deserializeChannelItem(json);
+      oneOfType = ChannelItem;
+      break;
+    case 'playlist':
+      oneOfResult = _deserializePlaylistItem(json);
+      oneOfType = PlaylistItem;
+      break;
+    case 'stream':
+    default:
+      oneOfResult = _deserializeStreamItem(json);
+      oneOfType = StreamItem;
+      break;
+  }
+
+  return SearchItem((b) => b
+    ..oneOf = OneOfDynamic(
+      typeIndex: oneOfTypes.indexOf(oneOfType),
+      types: oneOfTypes,
+      value: oneOfResult,
+    ));
+}
+
+SearchPage _deserializeSearchPage(Map<String, dynamic> json) {
+  final items = json['items'] as List<dynamic>?;
+  final itemList = items
+      ?.map(
+        (item) => _deserializeSearchItem(item as Map<String, dynamic>),
+      )
+      .toList();
+  return SearchPage((b) => b
+    ..corrected = json['corrected'] as bool?
+    ..nextpage = json['nextpage'] as String?
+    ..suggestion = json['suggestion'] as String?
+    ..items = itemList != null ? ListBuilder<SearchItem>(itemList) : null);
+}
+
+class UnauthenticatedApi {
+  final Dio _dio;
+
+  final Serializers _serializers;
+
+  const UnauthenticatedApi(this._dio, this._serializers);
+
+  /// Gets Channel Information from ID.
+  /// Gets all available Channel information about a channel.
+  ///
+  /// Parameters:
+  /// * [channelId] - The channel ID of the YouTube channel you want to get information about.
+  /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
+  /// * [headers] - Can be used to add additional headers to the request
+  /// * [extras] - Can be used to add flags to the request
+  /// * [validateStatus] - A [ValidateStatus] callback that can be used to determine request success based on the HTTP status of the response
+  /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
+  /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
+  ///
+  /// Returns a [Future] containing a [Response] with a [ChannelInfo] as data
+  /// Throws [DioError] if API call or serialization fails
+  Future<Response<ChannelInfo>> channelInfoId({
+    required String channelId,
+    CancelToken? cancelToken,
+    Map<String, dynamic>? headers,
+    Map<String, dynamic>? extra,
+    ValidateStatus? validateStatus,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
+  }) async {
+    final _path = r'/channel/{channelId}'
+        .replaceAll('{' r'channelId' '}', channelId.toString());
+    final _options = Options(
+      method: r'GET',
+      headers: <String, dynamic>{
+        ...?headers,
+      },
+      extra: <String, dynamic>{
+        'secure': <Map<String, String>>[],
+        ...?extra,
+      },
+      validateStatus: validateStatus,
+    );
+
+    final _response = await _dio.request<Object>(
+      _path,
+      options: _options,
+      cancelToken: cancelToken,
+      onSendProgress: onSendProgress,
+      onReceiveProgress: onReceiveProgress,
+    );
+
+    ChannelInfo? _responseData;
+
+    try {
+      final rawResponse = _response.data;
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+              rawResponse,
+              specifiedType: const FullType(ChannelInfo),
+            ) as ChannelInfo;
+    } catch (error, stackTrace) {
+      throw DioError(
+        requestOptions: _response.requestOptions,
+        response: _response,
+        type: DioErrorType.unknown,
+        error: error,
+        stackTrace: stackTrace,
+      );
+    }
+
+    return Response<ChannelInfo>(
+      data: _responseData,
+      headers: _response.headers,
+      isRedirect: _response.isRedirect,
+      requestOptions: _response.requestOptions,
+      redirects: _response.redirects,
+      statusCode: _response.statusCode,
+      statusMessage: _response.statusMessage,
+      extra: _response.extra,
+    );
+  }
+
+  /// Gets Channel Information from name.
+  /// Gets all available Channel information about a channel.
+  ///
+  /// Parameters:
+  /// * [name] - The name of the YouTube channel you want to get information about.
+  /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
+  /// * [headers] - Can be used to add additional headers to the request
+  /// * [extras] - Can be used to add flags to the request
+  /// * [validateStatus] - A [ValidateStatus] callback that can be used to determine request success based on the HTTP status of the response
+  /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
+  /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
+  ///
+  /// Returns a [Future] containing a [Response] with a [ChannelInfo] as data
+  /// Throws [DioError] if API call or serialization fails
+  Future<Response<ChannelInfo>> channelInfoName({
+    required String name,
+    CancelToken? cancelToken,
+    Map<String, dynamic>? headers,
+    Map<String, dynamic>? extra,
+    ValidateStatus? validateStatus,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
+  }) async {
+    final _path = r'/c/{name}'.replaceAll('{' r'name' '}', name.toString());
+    final _options = Options(
+      method: r'GET',
+      headers: <String, dynamic>{
+        ...?headers,
+      },
+      extra: <String, dynamic>{
+        'secure': <Map<String, String>>[],
+        ...?extra,
+      },
+      validateStatus: validateStatus,
+    );
+
+    final _response = await _dio.request<Object>(
+      _path,
+      options: _options,
+      cancelToken: cancelToken,
+      onSendProgress: onSendProgress,
+      onReceiveProgress: onReceiveProgress,
+    );
+
+    ChannelInfo? _responseData;
+
+    try {
+      final rawResponse = _response.data;
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+              rawResponse,
+              specifiedType: const FullType(ChannelInfo),
+            ) as ChannelInfo;
+    } catch (error, stackTrace) {
+      throw DioError(
+        requestOptions: _response.requestOptions,
+        response: _response,
+        type: DioErrorType.unknown,
+        error: error,
+        stackTrace: stackTrace,
+      );
+    }
+
+    return Response<ChannelInfo>(
+      data: _responseData,
+      headers: _response.headers,
+      isRedirect: _response.isRedirect,
+      requestOptions: _response.requestOptions,
+      redirects: _response.redirects,
+      statusCode: _response.statusCode,
+      statusMessage: _response.statusMessage,
+      extra: _response.extra,
+    );
+  }
+
+  /// Gets Channel Information from username.
+  /// Gets all available Channel information about a channel.
+  ///
+  /// Parameters:
+  /// * [username] - The username of the YouTube channel you want to get information about.
+  /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
+  /// * [headers] - Can be used to add additional headers to the request
+  /// * [extras] - Can be used to add flags to the request
+  /// * [validateStatus] - A [ValidateStatus] callback that can be used to determine request success based on the HTTP status of the response
+  /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
+  /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
+  ///
+  /// Returns a [Future] containing a [Response] with a [ChannelInfo] as data
+  /// Throws [DioError] if API call or serialization fails
+  Future<Response<ChannelInfo>> channelInfoUsername({
+    required String username,
+    CancelToken? cancelToken,
+    Map<String, dynamic>? headers,
+    Map<String, dynamic>? extra,
+    ValidateStatus? validateStatus,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
+  }) async {
+    final _path = r'/user/{username}'
+        .replaceAll('{' r'username' '}', username.toString());
+    final _options = Options(
+      method: r'GET',
+      headers: <String, dynamic>{
+        ...?headers,
+      },
+      extra: <String, dynamic>{
+        'secure': <Map<String, String>>[],
+        ...?extra,
+      },
+      validateStatus: validateStatus,
+    );
+
+    final _response = await _dio.request<Object>(
+      _path,
+      options: _options,
+      cancelToken: cancelToken,
+      onSendProgress: onSendProgress,
+      onReceiveProgress: onReceiveProgress,
+    );
+
+    ChannelInfo? _responseData;
+
+    try {
+      final rawResponse = _response.data;
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+              rawResponse,
+              specifiedType: const FullType(ChannelInfo),
+            ) as ChannelInfo;
+    } catch (error, stackTrace) {
+      throw DioError(
+        requestOptions: _response.requestOptions,
+        response: _response,
+        type: DioErrorType.unknown,
+        error: error,
+        stackTrace: stackTrace,
+      );
+    }
+
+    return Response<ChannelInfo>(
+      data: _responseData,
+      headers: _response.headers,
+      isRedirect: _response.isRedirect,
+      requestOptions: _response.requestOptions,
+      redirects: _response.redirects,
+      statusCode: _response.statusCode,
+      statusMessage: _response.statusMessage,
+      extra: _response.extra,
+    );
+  }
+
+  /// Gets more channel videos
+  /// Gets more channel videos.
+  ///
+  /// Parameters:
+  /// * [channelId] - The channel ID of the YouTube channel you want to get more videos from.
+  /// * [nextpage] - The next page token to get more videos from.
+  /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
+  /// * [headers] - Can be used to add additional headers to the request
+  /// * [extras] - Can be used to add flags to the request
+  /// * [validateStatus] - A [ValidateStatus] callback that can be used to determine request success based on the HTTP status of the response
+  /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
+  /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
+  ///
+  /// Returns a [Future] containing a [Response] with a [StreamsPage] as data
+  /// Throws [DioError] if API call or serialization fails
+  Future<Response<StreamsPage>> channelNextPage({
+    required String channelId,
+    required String nextpage,
+    CancelToken? cancelToken,
+    Map<String, dynamic>? headers,
+    Map<String, dynamic>? extra,
+    ValidateStatus? validateStatus,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
+  }) async {
+    final _path = r'/nextpage/channel/{channelId}'
+        .replaceAll('{' r'channelId' '}', channelId.toString());
+    final _options = Options(
+      method: r'GET',
+      headers: <String, dynamic>{
+        ...?headers,
+      },
+      extra: <String, dynamic>{
+        'secure': <Map<String, String>>[],
+        ...?extra,
+      },
+      validateStatus: validateStatus,
+    );
+
+    final _queryParameters = <String, dynamic>{
+      r'nextpage':
+          encodeQueryParameter(_serializers, nextpage, const FullType(String)),
+    };
+
+    final _response = await _dio.request<Object>(
+      _path,
+      options: _options,
+      queryParameters: _queryParameters,
+      cancelToken: cancelToken,
+      onSendProgress: onSendProgress,
+      onReceiveProgress: onReceiveProgress,
+    );
+
+    StreamsPage? _responseData;
+
+    try {
+      final rawResponse = _response.data;
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+              rawResponse,
+              specifiedType: const FullType(StreamsPage),
+            ) as StreamsPage;
+    } catch (error, stackTrace) {
+      throw DioError(
+        requestOptions: _response.requestOptions,
+        response: _response,
+        type: DioErrorType.unknown,
+        error: error,
+        stackTrace: stackTrace,
+      );
+    }
+
+    return Response<StreamsPage>(
+      data: _responseData,
+      headers: _response.headers,
+      isRedirect: _response.isRedirect,
+      requestOptions: _response.requestOptions,
+      redirects: _response.redirects,
+      statusCode: _response.statusCode,
+      statusMessage: _response.statusMessage,
+      extra: _response.extra,
+    );
+  }
+
+  /// Gets Comments
+  /// Gets the comments for a video.
+  ///
+  /// Parameters:
+  /// * [videoId] - The video ID of the YouTube video you want to get comments from.
+  /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
+  /// * [headers] - Can be used to add additional headers to the request
+  /// * [extras] - Can be used to add flags to the request
+  /// * [validateStatus] - A [ValidateStatus] callback that can be used to determine request success based on the HTTP status of the response
+  /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
+  /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
+  ///
+  /// Returns a [Future] containing a [Response] with a [CommentsPage] as data
+  /// Throws [DioError] if API call or serialization fails
+  Future<Response<CommentsPage>> comments({
+    required String videoId,
+    CancelToken? cancelToken,
+    Map<String, dynamic>? headers,
+    Map<String, dynamic>? extra,
+    ValidateStatus? validateStatus,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
+  }) async {
+    final _path = r'/comments/{videoId}'
+        .replaceAll('{' r'videoId' '}', videoId.toString());
+    final _options = Options(
+      method: r'GET',
+      headers: <String, dynamic>{
+        ...?headers,
+      },
+      extra: <String, dynamic>{
+        'secure': <Map<String, String>>[],
+        ...?extra,
+      },
+      validateStatus: validateStatus,
+    );
+
+    final _response = await _dio.request<Object>(
+      _path,
+      options: _options,
+      cancelToken: cancelToken,
+      onSendProgress: onSendProgress,
+      onReceiveProgress: onReceiveProgress,
+    );
+
+    CommentsPage? _responseData;
+
+    try {
+      final rawResponse = _response.data;
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+              rawResponse,
+              specifiedType: const FullType(CommentsPage),
+            ) as CommentsPage;
+    } catch (error, stackTrace) {
+      throw DioError(
+        requestOptions: _response.requestOptions,
+        response: _response,
+        type: DioErrorType.unknown,
+        error: error,
+        stackTrace: stackTrace,
+      );
+    }
+
+    return Response<CommentsPage>(
+      data: _responseData,
+      headers: _response.headers,
+      isRedirect: _response.isRedirect,
+      requestOptions: _response.requestOptions,
+      redirects: _response.redirects,
+      statusCode: _response.statusCode,
+      statusMessage: _response.statusMessage,
+      extra: _response.extra,
+    );
+  }
+
+  /// Gets more comments
+  /// Gets more comments.
+  ///
+  /// Parameters:
+  /// * [videoId] - The video ID of the YouTube video you want to get more comments from.
+  /// * [nextpage] - The next page token to get more comments from.
+  /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
+  /// * [headers] - Can be used to add additional headers to the request
+  /// * [extras] - Can be used to add flags to the request
+  /// * [validateStatus] - A [ValidateStatus] callback that can be used to determine request success based on the HTTP status of the response
+  /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
+  /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
+  ///
+  /// Returns a [Future] containing a [Response] with a [CommentsPage] as data
+  /// Throws [DioError] if API call or serialization fails
+  Future<Response<CommentsPage>> commentsNextPage({
+    required String videoId,
+    required String nextpage,
+    CancelToken? cancelToken,
+    Map<String, dynamic>? headers,
+    Map<String, dynamic>? extra,
+    ValidateStatus? validateStatus,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
+  }) async {
+    final _path = r'/nextpage/comments/{videoId}'
+        .replaceAll('{' r'videoId' '}', videoId.toString());
+    final _options = Options(
+      method: r'GET',
+      headers: <String, dynamic>{
+        ...?headers,
+      },
+      extra: <String, dynamic>{
+        'secure': <Map<String, String>>[],
+        ...?extra,
+      },
+      validateStatus: validateStatus,
+    );
+
+    final _queryParameters = <String, dynamic>{
+      r'nextpage':
+          encodeQueryParameter(_serializers, nextpage, const FullType(String)),
+    };
+
+    final _response = await _dio.request<Object>(
+      _path,
+      options: _options,
+      queryParameters: _queryParameters,
+      cancelToken: cancelToken,
+      onSendProgress: onSendProgress,
+      onReceiveProgress: onReceiveProgress,
+    );
+
+    CommentsPage? _responseData;
+
+    try {
+      final rawResponse = _response.data;
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+              rawResponse,
+              specifiedType: const FullType(CommentsPage),
+            ) as CommentsPage;
+    } catch (error, stackTrace) {
+      throw DioError(
+        requestOptions: _response.requestOptions,
+        response: _response,
+        type: DioErrorType.unknown,
+        error: error,
+        stackTrace: stackTrace,
+      );
+    }
+
+    return Response<CommentsPage>(
+      data: _responseData,
+      headers: _response.headers,
+      isRedirect: _response.isRedirect,
+      requestOptions: _response.requestOptions,
+      redirects: _response.redirects,
+      statusCode: _response.statusCode,
+      statusMessage: _response.statusMessage,
+      extra: _response.extra,
+    );
+  }
+
+  /// Generate a feed while unauthenticated, from a list of channelIds.
+  /// Generates a user feed while unauthenticated.
+  ///
+  /// Parameters:
+  /// * [channels] - A list of channelIds to generate a feed from.
+  /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
+  /// * [headers] - Can be used to add additional headers to the request
+  /// * [extras] - Can be used to add flags to the request
+  /// * [validateStatus] - A [ValidateStatus] callback that can be used to determine request success based on the HTTP status of the response
+  /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
+  /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
+  ///
+  /// Returns a [Future] containing a [Response] with a [BuiltList<StreamItem>] as data
+  /// Throws [DioError] if API call or serialization fails
+  Future<Response<BuiltList<StreamItem>>> feedUnauthenticated({
+    required BuiltList<String> channels,
+    CancelToken? cancelToken,
+    Map<String, dynamic>? headers,
+    Map<String, dynamic>? extra,
+    ValidateStatus? validateStatus,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
+  }) async {
+    final _path = r'/feed/unauthenticated';
+    final _options = Options(
+      method: r'GET',
+      headers: <String, dynamic>{
+        ...?headers,
+      },
+      extra: <String, dynamic>{
+        'secure': <Map<String, String>>[],
+        ...?extra,
+      },
+      validateStatus: validateStatus,
+    );
+
+    final _queryParameters = <String, dynamic>{
+      r'channels': encodeCollectionQueryParameter<String>(
+        _serializers,
+        channels,
+        const FullType(BuiltList, [FullType(String)]),
+        format: ListFormat.csv,
+      ),
+    };
+
+    final _response = await _dio.request<Object>(
+      _path,
+      options: _options,
+      queryParameters: _queryParameters,
+      cancelToken: cancelToken,
+      onSendProgress: onSendProgress,
+      onReceiveProgress: onReceiveProgress,
+    );
+
+    BuiltList<StreamItem>? _responseData;
+
+    try {
+      final rawResponse = _response.data;
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+              rawResponse,
+              specifiedType: const FullType(BuiltList, [FullType(StreamItem)]),
+            ) as BuiltList<StreamItem>;
+    } catch (error, stackTrace) {
+      throw DioError(
+        requestOptions: _response.requestOptions,
+        response: _response,
+        type: DioErrorType.unknown,
+        error: error,
+        stackTrace: stackTrace,
+      );
+    }
+
+    return Response<BuiltList<StreamItem>>(
+      data: _responseData,
+      headers: _response.headers,
+      isRedirect: _response.isRedirect,
+      requestOptions: _response.requestOptions,
+      redirects: _response.redirects,
+      statusCode: _response.statusCode,
+      statusMessage: _response.statusMessage,
+      extra: _response.extra,
+    );
+  }
+
+  /// Searches for videos, channels, and playlists.
+  /// Searches for videos, channels, and playlists.
+  ///
+  /// Parameters:
+  /// * [q] - The search query string.
+  /// * [filter] - The filter parameter specifies a filter query that restricts the results to items that match the filter.
+  /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
+  /// * [headers] - Can be used to add additional headers to the request
+  /// * [extras] - Can be used to add flags to the request
+  /// * [validateStatus] - A [ValidateStatus] callback that can be used to determine request success based on the HTTP status of the response
+  /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
+  /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
+  ///
+  /// Returns a [Future] containing a [Response] with a [SearchPage] as data
+  /// Throws [DioError] if API call or serialization fails
+  Future<Response<SearchPage>> search({
+    required String q,
+    required SearchFilter filter,
+    CancelToken? cancelToken,
+    Map<String, dynamic>? headers,
+    Map<String, dynamic>? extra,
+    ValidateStatus? validateStatus,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
+  }) async {
+    final _path = r'/search';
+    final _options = Options(
+      method: r'GET',
+      headers: <String, dynamic>{
+        ...?headers,
+      },
+      extra: <String, dynamic>{
+        'secure': <Map<String, String>>[],
+        ...?extra,
+      },
+      validateStatus: validateStatus,
+    );
+
+    final _queryParameters = <String, dynamic>{
+      r'q': encodeQueryParameter(_serializers, q, const FullType(String)),
+      r'filter': encodeQueryParameter(
+          _serializers, filter, const FullType(SearchFilter)),
+    };
+
+    final _response = await _dio.request<Object>(
+      _path,
+      options: _options,
+      queryParameters: _queryParameters,
+      cancelToken: cancelToken,
+      onSendProgress: onSendProgress,
+      onReceiveProgress: onReceiveProgress,
+    );
+
+    SearchPage? _responseData;
+
+    try {
+      final rawResponse = _response.data;
+      if (rawResponse == null) {
+        _responseData = null;
+      } else if (rawResponse is Map<String, dynamic>) {
+        _responseData = _deserializeSearchPage(rawResponse);
+      } else {
+        _responseData = null;
+      }
+    } catch (error, stackTrace) {
+      throw DioException(
+        requestOptions: _response.requestOptions,
+        response: _response,
+        type: DioExceptionType.unknown,
+        error: error,
+        stackTrace: stackTrace,
+      );
+    }
+
+    return Response<SearchPage>(
+      data: _responseData,
+      headers: _response.headers,
+      isRedirect: _response.isRedirect,
+      requestOptions: _response.requestOptions,
+      redirects: _response.redirects,
+      statusCode: _response.statusCode,
+      statusMessage: _response.statusMessage,
+      extra: _response.extra,
+    );
+  }
+
+  /// Gets more search results
+  /// Gets more search results.
+  ///
+  /// Parameters:
+  /// * [nextpage] - The next page token to get more search results from.
+  /// * [q] - The search query string.
+  /// * [filter] - The filter parameter specifies a filter query that restricts the results to items that match the filter.
+  /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
+  /// * [headers] - Can be used to add additional headers to the request
+  /// * [extras] - Can be used to add flags to the request
+  /// * [validateStatus] - A [ValidateStatus] callback that can be used to determine request success based on the HTTP status of the response
+  /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
+  /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
+  ///
+  /// Returns a [Future] containing a [Response] with a [SearchPage] as data
+  /// Throws [DioError] if API call or serialization fails
+  Future<Response<SearchPage>> searchNextPage({
+    required String nextpage,
+    required String q,
+    required SearchFilter filter,
+    CancelToken? cancelToken,
+    Map<String, dynamic>? headers,
+    Map<String, dynamic>? extra,
+    ValidateStatus? validateStatus,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
+  }) async {
+    final _path = r'/nextpage/search';
+    final _options = Options(
+      method: r'GET',
+      headers: <String, dynamic>{
+        ...?headers,
+      },
+      extra: <String, dynamic>{
+        'secure': <Map<String, String>>[],
+        ...?extra,
+      },
+      validateStatus: validateStatus,
+    );
+
+    final _queryParameters = <String, dynamic>{
+      r'nextpage':
+          encodeQueryParameter(_serializers, nextpage, const FullType(String)),
+      r'q': encodeQueryParameter(_serializers, q, const FullType(String)),
+      r'filter': encodeQueryParameter(
+          _serializers, filter, const FullType(SearchFilter)),
+    };
+
+    final _response = await _dio.request<Object>(
+      _path,
+      options: _options,
+      queryParameters: _queryParameters,
+      cancelToken: cancelToken,
+      onSendProgress: onSendProgress,
+      onReceiveProgress: onReceiveProgress,
+    );
+
+    SearchPage? _responseData;
+
+    try {
+      final rawResponse = _response.data;
+      if (rawResponse == null) {
+        _responseData = null;
+      } else if (rawResponse is Map<String, dynamic>) {
+        _responseData = _deserializeSearchPage(rawResponse);
+      } else {
+        _responseData = null;
+      }
+    } catch (error, stackTrace) {
+      throw DioException(
+        requestOptions: _response.requestOptions,
+        response: _response,
+        type: DioExceptionType.unknown,
+        error: error,
+        stackTrace: stackTrace,
+      );
+    }
+
+    return Response<SearchPage>(
+      data: _responseData,
+      headers: _response.headers,
+      isRedirect: _response.isRedirect,
+      requestOptions: _response.requestOptions,
+      redirects: _response.redirects,
+      statusCode: _response.statusCode,
+      statusMessage: _response.statusMessage,
+      extra: _response.extra,
+    );
+  }
+
+  /// Gets Video Information
+  /// Gets all available Stream information about a video.
+  ///
+  /// Parameters:
+  /// * [videoId] - The video ID of the YouTube video you want to get information about.
+  /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
+  /// * [headers] - Can be used to add additional headers to the request
+  /// * [extras] - Can be used to add flags to the request
+  /// * [validateStatus] - A [ValidateStatus] callback that can be used to determine request success based on the HTTP status of the response
+  /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
+  /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
+  ///
+  /// Returns a [Future] containing a [Response] with a [VideoInfo] as data
+  /// Throws [DioError] if API call or serialization fails
+  Future<Response<VideoInfo>> streamInfo({
+    required String videoId,
+    CancelToken? cancelToken,
+    Map<String, dynamic>? headers,
+    Map<String, dynamic>? extra,
+    ValidateStatus? validateStatus,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
+  }) async {
+    final _path = r'/streams/{videoId}'
+        .replaceAll('{' r'videoId' '}', videoId.toString());
+    final _options = Options(
+      method: r'GET',
+      headers: <String, dynamic>{
+        ...?headers,
+      },
+      extra: <String, dynamic>{
+        'secure': <Map<String, String>>[],
+        ...?extra,
+      },
+      validateStatus: validateStatus,
+    );
+
+    final _response = await _dio.request<Object>(
+      _path,
+      options: _options,
+      cancelToken: cancelToken,
+      onSendProgress: onSendProgress,
+      onReceiveProgress: onReceiveProgress,
+    );
+
+    VideoInfo? _responseData;
+
+    try {
+      final rawResponse = _response.data;
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+              rawResponse,
+              specifiedType: const FullType(VideoInfo),
+            ) as VideoInfo;
+    } catch (error, stackTrace) {
+      throw DioError(
+        requestOptions: _response.requestOptions,
+        response: _response,
+        type: DioErrorType.unknown,
+        error: error,
+        stackTrace: stackTrace,
+      );
+    }
+
+    return Response<VideoInfo>(
+      data: _responseData,
+      headers: _response.headers,
+      isRedirect: _response.isRedirect,
+      requestOptions: _response.requestOptions,
+      redirects: _response.redirects,
+      statusCode: _response.statusCode,
+      statusMessage: _response.statusMessage,
+      extra: _response.extra,
+    );
+  }
+
+  /// Gets all Trending Videos
+  /// Gets all Trending Videos in the requested country.
+  ///
+  /// Parameters:
+  /// * [region] - The Region to get trending videos from.
+  /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
+  /// * [headers] - Can be used to add additional headers to the request
+  /// * [extras] - Can be used to add flags to the request
+  /// * [validateStatus] - A [ValidateStatus] callback that can be used to determine request success based on the HTTP status of the response
+  /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
+  /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
+  ///
+  /// Returns a [Future] containing a [Response] with a [BuiltList<StreamItem>] as data
+  /// Throws [DioError] if API call or serialization fails
+  Future<Response<BuiltList<StreamItem>>> trending({
+    required Regions region,
+    CancelToken? cancelToken,
+    Map<String, dynamic>? headers,
+    Map<String, dynamic>? extra,
+    ValidateStatus? validateStatus,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
+  }) async {
+    final _path = r'/trending';
+    final _options = Options(
+      method: r'GET',
+      headers: <String, dynamic>{
+        ...?headers,
+      },
+      extra: <String, dynamic>{
+        'secure': <Map<String, String>>[],
+        ...?extra,
+      },
+      validateStatus: validateStatus,
+    );
+
+    final _queryParameters = <String, dynamic>{
+      r'region':
+          encodeQueryParameter(_serializers, region, const FullType(Regions)),
+    };
+
+    final _response = await _dio.request<Object>(
+      _path,
+      options: _options,
+      queryParameters: _queryParameters,
+      cancelToken: cancelToken,
+      onSendProgress: onSendProgress,
+      onReceiveProgress: onReceiveProgress,
+    );
+
+    BuiltList<StreamItem>? _responseData;
+
+    try {
+      final rawResponse = _response.data;
+      if (rawResponse == null) {
+        _responseData = null;
+      } else if (rawResponse is List) {
+        _responseData = _deserializeStreamItemList(rawResponse);
+      } else {
+        _responseData = null;
+      }
+    } catch (error, stackTrace) {
+      throw DioException(
+        requestOptions: _response.requestOptions,
+        response: _response,
+        type: DioExceptionType.unknown,
+        error: error,
+        stackTrace: stackTrace,
+      );
+    }
+
+    return Response<BuiltList<StreamItem>>(
+      data: _responseData,
+      headers: _response.headers,
+      isRedirect: _response.isRedirect,
+      requestOptions: _response.requestOptions,
+      redirects: _response.redirects,
+      statusCode: _response.statusCode,
+      statusMessage: _response.statusMessage,
+      extra: _response.extra,
+    );
+  }
+}
