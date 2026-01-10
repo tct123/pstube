@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-    FLUTTER_VERSION: "3.19.5"
+    FLUTTER_VERSION: "3.38.5"
 
 jobs:
   lint:
