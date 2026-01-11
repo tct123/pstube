@@ -12,7 +12,9 @@ installed_size: 36000
 
 include_build_number: false
 
-metainfo: linux/packaging/pstube.xml
+metainfo: linux/packaging/pstube.appdata.xml
+
+desktop_file: linux/packaging/pstube.desktop
 
 dependencies:
   - libmpv1

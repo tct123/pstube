@@ -12,7 +12,8 @@ display_name: PsTube
 dependencies:
   - mpv-libs
 
-metainfo: linux/packaging/pstube.xml
+metainfo: linux/packaging/pstube.appdata.xml
+desktop_file: linux/packaging/pstube.desktop
 
 keywords:
   - PsTube

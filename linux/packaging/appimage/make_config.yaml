@@ -3,6 +3,10 @@ license: GPLv3
 
 icon: assets/pstube.png
 
+metainfo: linux/packaging/pstube.appdata.xml
+
+desktop_file: linux/packaging/pstube.desktop
+
 keywords:
   - FluTube
   - YouTube
