@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=PsTube
+GenericName=PsTube
+Exec=pstube %U
+Icon=pstube
+Type=Application
+Categories=Utility;
+Keywords=PsTube;FluTube;YouTube;Piped;Watch;
+StartupNotify=false
+Terminal=false
+StartupWMClass=pstube

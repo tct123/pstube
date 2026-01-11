@@ -10,10 +10,15 @@ license: GPLv3
 icon: assets/pstube.png
 installed_size: 36000
 
+include_build_number: false
+
+metainfo: linux/packaging/pstube.xml
+
 dependencies:
   - libmpv1
 
 keywords:
+  - PsTube
   - FluTube
   - YouTube
   - Piped

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+	<id>pstube</id>
+	<name>PsTube</name>
+	<summary>Watch and download videos without ads</summary>
+	<metadata_license>CC0-1.0</metadata_license>
+	<project_license>GPL-3.0-only</project_license>
+	<recommends>
+		<control>pointing</control>
+		<control>keyboard</control>
+		<control>touch</control>
+	</recommends>
+	<developer_name>Prateek Sunal</developer_name>
+	<url type="homepage">https://github.com/prateekmedia/pstube</url>
+	<url type="bugtracker">https://github.com/prateekmedia/pstube/issues</url>
+	<url type="vcs-browser">https://github.com/prateekmedia/pstube</url>
+	<description>
+		<p>Ever wondered how the videos in the internet will look without ads, no more wondering
+			just use PsTube.</p>
+		<p>Features:</p>
+		<ul>
+			<li>Beautiful user interface</li>
+			<li>Lightweight and fast</li>
+			<li>No Login Required</li>
+			<li>Keep your liked videos and comments</li>
+			<li>Playlists support</li>
+			<li>Download videos, audios and thumbnails</li>
+			<li>Ads free forever</li>
+			<li>Free libre and open source (FLOSS)</li>
+		</ul>
+		<p>Supported Platforms:</p>
+		<ul>
+			<li>Youtube</li>
+		</ul>
+	</description>
+	<screenshots>
+		<screenshot type="default">
+			<image type="source">
+				https://github.com/prateekmedia/pstube/blob/3.1.1/assets/screenshots/home-desktop.jpg?raw=true</image>
+			<caption>Home screen showing video listings</caption>
+		</screenshot>
+		<screenshot>
+			<image type="source">
+				https://github.com/prateekmedia/pstube/blob/3.1.1/assets/screenshots/search-desktop.jpg?raw=true</image>
+			<caption>Search interface for finding videos</caption>
+		</screenshot>
+		<screenshot>
+			<image type="source">
+				https://github.com/prateekmedia/pstube/blob/3.1.1/assets/screenshots/video-desktop.jpg?raw=true</image>
+			<caption>Video player showing content</caption>
+		</screenshot>
+	</screenshots>
+	<launchable type="desktop-id">io.github.prateekmedia.pstube.desktop</launchable>
+	<releases>
+		<release version="3.1.2" date="2025-12-11" />
+		<release version="3.1.1" date="2025-12-11" />
+		<release version="2.0.0" date="2022-03-25" />
+		<release version="1.1.0" date="2021-01-07" />
+		<release version="1.0.0" date="2021-12-20" />
+		<release version="0.6.0" date="2021-10-18" />
+		<release version="0.5.0" date="2021-09-29" />
+		<release version="0.4.5" date="2021-09-28" />
+		<release version="0.4.0" date="2021-09-28" />
+	</releases>
+	<content_rating type="oars-1.1" />
+	<update_contact>pankajsunal123@gmail.com</update_contact>
+</component>

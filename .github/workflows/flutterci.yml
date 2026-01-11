@@ -63,13 +63,13 @@ jobs:
         run: |
             # Init Configuration for Linux Desktop
             flutter config --enable-linux-desktop
-            dart pub global activate flutter_distributor
+            dart pub global activate --source git https://github.com/prateekmedia/fastforge --git-ref main --git-path packages/fastforge
 
             # Package to different formats
-            flutter_distributor package --platform=linux --targets=deb --skip-clean
-            flutter_distributor package --platform=linux --targets=rpm --skip-clean
-            # flutter_distributor package --platform=linux --targets=appimage --skip-clean
-            flutter_distributor package --platform=linux --targets=zip --skip-clean
+            fastforge package --platform=linux --targets=deb --skip-clean
+            fastforge package --platform=linux --targets=rpm --skip-clean
+            # fastforge package --platform=linux --targets=appimage --skip-clean
+            fastforge package --platform=linux --targets=zip --skip-clean
 
             # Move artifacts
             mv dist/**/*-*-linux.deb artifacts/pstube-${{ github.ref_name }}-linux-x86_64.deb

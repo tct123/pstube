@@ -12,7 +12,10 @@ display_name: PsTube
 dependencies:
   - mpv-libs
 
+metainfo: linux/packaging/pstube.xml
+
 keywords:
+  - PsTube
   - FluTube
   - YouTube
   - Piped
