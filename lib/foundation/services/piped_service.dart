@@ -1,14 +1,13 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:piped_api/piped_api.dart';
 import 'package:pstube/data/models/channel_data.dart';
 import 'package:pstube/data/models/comment_data.dart';
 import 'package:pstube/data/models/models.dart';
-import 'package:pstube/data/models/playlist_data.dart';
 import 'package:pstube/data/models/search_data.dart';
-import 'package:pstube/states/region/provider.dart';
 import 'package:pstube/foundation/services/piped_instances.dart';
 import 'package:pstube/foundation/services/youtube_explode_dart_service.dart';
+import 'package:pstube/states/region/provider.dart';
+import 'package:piped_api/piped_api.dart';
 
 final pipedServiceProvider = Provider<PipedService>((ref) {
   final api = ref.watch(unauthenticatedApiProvider);

@@ -42,11 +42,10 @@ class PipedInstance {
 }
 
 class PipedInstanceSelector {
+  /// Fetches all available instances and selects the best one
   PipedInstanceSelector({Dio? dio}) : _dio = dio ?? Dio();
 
   final Dio _dio;
-
-  /// Fetches all available instances and selects the best one
   Future<PipedInstance> selectBestInstance() async {
     try {
       final response = await _dio.get<List<dynamic>>(
@@ -99,7 +98,6 @@ class PipedInstanceSelector {
     return PipedInstance(
       name: 'Default',
       apiUrl: 'https://api.piped.private.coffee',
-      version: null,
       uptime24h: 100,
       upToDate: true,
     );

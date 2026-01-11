@@ -44,7 +44,9 @@ class YoutubeService {
     return null;
   }
 
+  // ignore: avoid_non_null_assertion
   VideoData _convertToVideoData(yexp.Video video) {
+    final channelId = video.channelId;
     return VideoData(
       thumbnails: Thumbnails(videoId: video.id.value),
       title: video.title,
@@ -52,8 +54,8 @@ class YoutubeService {
       duration: video.duration?.inSeconds,
       durationString: video.duration?.toString(),
       uploader: video.author,
-      uploaderId:
-          video.channelId != null ? UploaderId(video.channelId!.value) : null,
+      // ignore: unnecessary_null_comparison
+      uploaderId: channelId != null ? UploaderId(channelId.value) : null,
       views: video.engagement.viewCount,
       uploadDate: video.uploadDate?.toIso8601String(),
     );

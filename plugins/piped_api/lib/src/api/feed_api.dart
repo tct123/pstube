@@ -9,7 +9,6 @@ import 'package:dio/dio.dart';
 
 import 'package:built_collection/built_collection.dart';
 import 'package:piped_api/src/api_util.dart';
-import 'package:piped_api/src/model/exception_error.dart';
 import 'package:piped_api/src/model/stream_item.dart';
 
 class FeedApi {

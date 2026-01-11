@@ -4,11 +4,10 @@ import 'dart:async';
 import 'package:built_collection/built_collection.dart';
 import 'package:pstube/data/models/comment_data.dart';
 import 'package:pstube/data/models/models.dart';
-import 'package:pstube/data/models/video_data.dart';
 import 'package:piped_api/piped_api.dart' as piped_api;
 import 'package:piped_api/piped_api.dart' show SearchFilter;
-import 'package:youtube_explode_dart/src/videos/video_id.dart' as yt_video_id;
 import 'package:youtube_explode_dart/youtube_explode_dart.dart' as yt_lib;
+import 'package:youtube_explode_dart/src/videos/video_id.dart' as yt_video_id;
 
 /// YouTubeExplode service for video data with streams
 /// Used as primary source when Piped API is unavailable for video details

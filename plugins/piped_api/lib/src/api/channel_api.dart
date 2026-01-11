@@ -9,7 +9,6 @@ import 'package:dio/dio.dart';
 
 import 'package:piped_api/src/api_util.dart';
 import 'package:piped_api/src/model/channel_info.dart';
-import 'package:piped_api/src/model/exception_error.dart';
 import 'package:piped_api/src/model/streams_page.dart';
 
 class ChannelApi {

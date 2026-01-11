@@ -3,7 +3,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:html/parser.dart';
 import 'package:parsed_readmore/parsed_readmore.dart';
-import 'package:piped_api/piped_api.dart';
 import 'package:pstube/data/models/comment_data.dart';
 import 'package:pstube/data/models/models.dart';
 import 'package:pstube/foundation/constants.dart';
