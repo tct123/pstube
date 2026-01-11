@@ -6,6 +6,11 @@
 -keep class io.flutter.** { *; }
 -keep class io.flutter.plugins.** { *; }
 
+# Google Play Core (required by Flutter embedding)
+-keep class com.google.android.play.core.splitcompat.SplitCompatApplication { *; }
+-keep class com.google.android.play.core.splitinstall.** { *; }
+-keep class com.google.android.play.core.tasks.** { *; }
+
 # -keep class com.google.firebase.** { *; } // uncomment this if you are using firebase in the project
 
 -keep class com.arthenica.mobileffmpeg.Config {
